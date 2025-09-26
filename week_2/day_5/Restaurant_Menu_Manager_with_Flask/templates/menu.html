@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Menu</h2>
+<div class="list-group">
+{% for item in items %}
+    <div class="list-group-item menu-item d-flex justify-content-between align-items-center">
+        <div>
+            <strong>{{ item[1] }}</strong> - ${{ item[2] }}
+        </div>
+        <div>
+            <a class="btn btn-sm btn-primary" href="{{ url_for('menu.update_item', item_id=item[0]) }}">Edit</a>
+            <a class="btn btn-sm btn-danger" href="{{ url_for('menu.delete_item', item_id=item[0]) }}">Delete</a>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
+
+
