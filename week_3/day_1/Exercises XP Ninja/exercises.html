@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Exercise 1 : Checking the BMI
+let person1 = {
+  fullName: "Ali Ahmed",
+  mass: 70,   
+  height: 1.75, 
+  calcBMI: function() {
+    return this.mass / (this.height * this.height);
+  }
+};
+
+
+let person2 = {
+  fullName: "Nouhaila Ait lahssaine",
+  mass: 60,
+  height: 1.60,
+  calcBMI: function() {
+    return this.mass / (this.height * this.height);
+  }
+};
+
+
+function compareBMI(p1, p2) {
+  let bmi1 = p1.calcBMI();
+  let bmi2 = p2.calcBMI();
+
+  if (bmi1 > bmi2) {
+    console.log(`${p1.fullName} has the largest BMI (${bmi1.toFixed(2)})`);
+  } else if (bmi2 > bmi1) {
+    console.log(`${p2.fullName} has the largest BMI (${bmi2.toFixed(2)})`);
+  } else {
+    console.log(`Both have the same BMI (${bmi1.toFixed(2)})`);
+  }
+}
+
+compareBMI(person1, person2);
+
+// Exercise 2 : Grade Average
+
+
+function calculateAverage(gradesList) {
+  let sum = 0;
+  for (let i = 0; i < gradesList.length; i++) {
+    sum += gradesList[i];
+  }
+  return sum / gradesList.length;
+}
+
+
+function findAvg(gradesList) {
+  let avg = calculateAverage(gradesList);
+
+  console.log("Average:", avg);
+
+  if (avg > 65) {
+    console.log("Congratulations! You passed.");
+  } else {
+    console.log("Sorry, you failed. You must repeat the course.");
+  }
+}
+
+
+let grades = [70, 50, 90, 60, 80];
+findAvg(grades);
+
+    </script>
+</body>
+</html>
