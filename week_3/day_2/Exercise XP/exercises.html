@@ -1,0 +1,207 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <script>
+// Exercise 1 : Find the numbers divisible by 23
+
+function displayNumbersDivisible(divisor = 23) {
+    let sum = 0;
+    for (let i = 0; i <= 500; i++) {
+        if (i % divisor === 0) {
+            console.log(i);
+            sum += i;
+        }
+    }
+    console.log("Sum:", sum);
+}
+
+
+displayNumbersDivisible();   
+displayNumbersDivisible(3);  
+displayNumbersDivisible(45);
+
+//  Exercise 2 : Shopping List
+const stock = { 
+    "banana": 6, 
+    "apple": 0,
+    "pear": 12,
+    "orange": 32,
+    "blueberry":1
+};  
+
+const prices = {    
+    "banana": 4, 
+    "apple": 2, 
+    "pear": 1,
+    "orange": 1.5,
+    "blueberry":10
+}; 
+
+let shoppingList = ["banana", "orange", "apple"];
+
+function myBill() {
+    let total = 0;
+    for (let item of shoppingList) {
+        if (stock[item] > 0) {
+            total += prices[item];
+            stock[item] -= 1; 
+        }
+    }
+    return total;
+}
+
+
+console.log("My Bill:", myBill());
+console.log("Stock after shopping:", stock);
+
+// Exercise 3 : What’s in my wallet ?
+
+function changeEnough(itemPrice, amountOfChange) {
+    let total = (amountOfChange[0] * 0.25) +
+                (amountOfChange[1] * 0.10) +
+                (amountOfChange[2] * 0.05) +
+                (amountOfChange[3] * 0.01);
+    return total >= itemPrice;
+}
+
+
+console.log(changeEnough(4.25, [25, 20, 5, 0])); 
+console.log(changeEnough(14.11, [2,100,0,0]));  
+console.log(changeEnough(0.75, [0,0,20,5]));    
+
+//  Exercise 4 : Vacations Costs
+
+function hotelCost(nights) {
+    return nights * 140;
+}
+
+function planeRideCost(destination) {
+    if (destination === "London") return 183;
+    else if (destination === "Paris") return 220;
+    else return 300;
+}
+
+function rentalCarCost(days) {
+    let cost = days * 40;
+    if (days > 10) {
+        cost *= 0.95; 
+    }
+    return cost;
+}
+
+function totalVacationCost(nights, destination, days) {
+    let hotel = hotelCost(nights);
+    let plane = planeRideCost(destination);
+    let car = rentalCarCost(days);
+    console.log(`The car cost: $${car}, the hotel cost: $${hotel}, the plane tickets cost: $${plane}.`);
+    return car + hotel + plane;
+}
+
+
+console.log("Total cost:", totalVacationCost(5, "London", 12));
+
+//  Exercise 5 : Users
+
+
+let div = document.getElementById("container");
+console.log(div);
+
+document.querySelectorAll(".list")[0].children[1].textContent = "Richard";
+
+document.querySelectorAll(".list")[1].children[1].remove();
+
+
+let lists = document.querySelectorAll(".list");
+for (let ul of lists) {
+    ul.firstElementChild.textContent = "Nouhaila";
+}
+
+
+lists.forEach(ul => ul.classList.add("student_list"));
+
+
+lists[0].classList.add("university", "attendance");
+
+div.style.backgroundColor = "lightblue";
+div.style.padding = "20px";
+
+let dan = lists[1].lastElementChild;
+if (dan.textContent === "Dan") {
+    dan.style.display = "none";
+}
+
+
+let richard = lists[0].children[1];
+richard.style.border = "1px solid black";
+
+
+document.body.style.fontSize = "20px";
+
+if (div.style.backgroundColor === "lightblue") {
+    alert("Hello " + lists[0].children[0].textContent + " and " + lists[1].children[0].textContent);
+}
+
+//  Exercise 6 : Change the navbar
+
+let nav = document.getElementById("navBar");
+nav.setAttribute("id", "socialNetworkNavigation");
+
+let ul = nav.querySelector("ul");
+
+
+let newLi = document.createElement("li");
+let text = document.createTextNode("Logout");
+newLi.appendChild(text);
+
+ul.appendChild(newLi);
+
+console.log("First link:", ul.firstElementChild.textContent);
+console.log("Last link:", ul.lastElementChild.textContent);
+
+// Exercise 7 : My Book List
+
+let allBooks = [
+    {
+        title: "Harry Potter",
+        author: "J.K. Rowling",
+        image: "https://picsum.photos/100",
+        alreadyRead: true
+    },
+    {
+        title: "The Alchemist",
+        author: "Paulo Coelho",
+        image: "https://picsum.photos/101",
+        alreadyRead: false
+    }
+];
+
+let section = document.querySelector(".listBooks");
+
+allBooks.forEach(book => {
+    let div = document.createElement("div");
+    let title = document.createElement("p");
+    title.textContent = `${book.title} written by ${book.author}`;
+    
+    let img = document.createElement("img");
+    img.src = book.image;
+    img.style.width = "100px";
+
+    if (book.alreadyRead) {
+        title.style.color = "red";
+    }
+
+    div.appendChild(title);
+    div.appendChild(img);
+    section.appendChild(div);
+});
+
+
+
+    </script>
+ </body>
+ </html>
