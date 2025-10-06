@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><strong>Hello</strong> I hope you are enjoying <strong>this</strong> class. At the
+<strong>end</strong> you <strong>will</strong> be great Developers!
+<strong>Enjoy</strong> the <strong>JavaScript </strong> lessons</p>
+
+<script>
+    let allBoldItems;
+
+// Get all bold items
+function getBoldItems() {
+  allBoldItems = document.querySelectorAll("strong");
+}
+
+// Change color to blue
+function highlight() {
+  allBoldItems.forEach(item => item.style.color = "blue");
+}
+
+// Return color to black
+function returnItemsToDefault() {
+  allBoldItems.forEach(item => item.style.color = "black");
+}
+
+getBoldItems();
+
+const paragraph = document.querySelector("p");
+paragraph.addEventListener("mouseover", highlight);
+paragraph.addEventListener("mouseout", returnItemsToDefault);
+
+</script>
+</body>
+</html>

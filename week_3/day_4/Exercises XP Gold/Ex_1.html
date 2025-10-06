@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<select id="genres">
+    <option value="rock">Rock</option>
+    <option value="blues" selected>Blues</option>
+  </select>
+
+  <p id="result"></p>
+
+  <script>
+    const select = document.getElementById("genres");
+    const result = document.getElementById("result");
+
+   
+    result.textContent = "Selected: " + select.value;
+
+   
+    select.addEventListener("change", () => {
+      result.textContent = "Selected: " + select.value;
+    });
+
+   
+    const option = document.createElement("option");
+    option.value = "classic";
+    option.textContent = "Classic";
+    select.appendChild(option);
+    option.selected = true;
+    result.textContent = "Selected: " + select.value;
+  </script>
+</body>
+</html>

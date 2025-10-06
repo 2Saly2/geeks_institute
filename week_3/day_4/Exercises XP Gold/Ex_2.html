@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <form>
+    <select id="colorSelect">
+      <option>Red</option>
+      <option>Green</option>
+      <option>White</option>
+      <option>Black</option>
+    </select>
+    <input type="button" value="Select and Remove" id="removeBtn">
+  </form>
+
+  <script>
+    const select = document.getElementById("colorSelect");
+    const button = document.getElementById("removeBtn");
+
+    function removecolor() {
+      const selectedIndex = select.selectedIndex;
+      if (selectedIndex !== -1) {
+        select.remove(selectedIndex);
+      }
+    }
+
+    button.addEventListener("click", removecolor);
+  </script>
+</body>
+</html>

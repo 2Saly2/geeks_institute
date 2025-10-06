@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      margin-bottom: 10px;
+    }
+    button {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+    #story {
+      font-weight: bold;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+    <h1>Mad Libs</h1>
+
+  <form id="libform">
+      <label for="noun">Noun:</label>
+      <input type="text" id="noun"><br>
+
+      <label for="adjective">Adjective:</label>
+      <input type="text" id="adjective"><br>
+
+      <label for="person">Someone's Name:</label>
+      <input type="text" id="person"><br>
+
+      <label for="verb">Verb:</label>
+      <input type="text" id="verb"><br>
+
+      <label for="place">A place:</label>
+      <input type="text" id="place"><br>
+
+      <button type="submit" id="lib-button">Lib it!</button>
+      <button type="button" id="shuffle-button">Shuffle</button>
+  </form>
+
+  <p>Generated story: <span id="story"></span></p>
+
+  <script>
+    const form = document.getElementById("libform");
+    const storySpan = document.getElementById("story");
+    const shuffleBtn = document.getElementById("shuffle-button");
+
+    let currentWords = {}; 
+    let storyTemplates = []; 
+
+    
+    function generateStories(words) {
+      return [
+        `${words.person} went to ${words.place} to ${words.verb} a ${words.adjective} ${words.noun}.`,
+        `In ${words.place}, ${words.person} tried to ${words.verb} the ${words.adjective} ${words.noun}.`,
+        `${words.person} loves to ${words.verb} a ${words.adjective} ${words.noun} in ${words.place}.`
+      ];
+    }
+
+    function showRandomStory() {
+      if(storyTemplates.length === 0) return;
+      const index = Math.floor(Math.random() * storyTemplates.length);
+      storySpan.textContent = storyTemplates[index];
+    }
+
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+     
+      const noun = document.getElementById("noun").value.trim();
+      const adjective = document.getElementById("adjective").value.trim();
+      const person = document.getElementById("person").value.trim();
+      const verb = document.getElementById("verb").value.trim();
+      const place = document.getElementById("place").value.trim();
+    
+      if(!noun || !adjective || !person || !verb || !place) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+    
+      currentWords = { noun, adjective, person, verb, place };
+      
+    
+      storyTemplates = generateStories(currentWords);
+
+     
+      showRandomStory();
+    });
+
+   
+    shuffleBtn.addEventListener("click", function(){
+      showRandomStory();
+    });
+  </script>
+
+</body>
+</html>
