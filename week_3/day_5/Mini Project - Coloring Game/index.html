@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎨 Coloring Board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      body { font-family: 'Poppins', sans-serif; }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-r from-indigo-100 to-purple-100 flex h-screen font-sans">
+    <!-- Sidebar -->
+    <div class="w-72 bg-white/90 backdrop-blur-md shadow-2xl p-6 flex flex-col justify-between rounded-r-3xl">
+      <div>
+        <h1 class="text-3xl font-bold mb-8 text-center text-indigo-600 drop-shadow">🎨 Drawing Board</h1>
+
+        <!-- Color Picker -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium mb-2">🎨 Select Color</label>
+          <input id="colorPicker" type="color" class="w-full h-12 rounded cursor-pointer border border-gray-300 shadow-inner" />
+        </div>
+
+        <!-- Brush Size -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium mb-2">🖌️ Brush Size</label>
+          <input id="brushSize" type="range" min="1" max="5" value="1" class="w-full cursor-pointer accent-indigo-500" />
+        </div>
+
+        <!-- Grid Size -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium mb-2">🧩 Grid Size: <span id="gridSizeLabel">50</span>x<span id="gridSizeLabel2">50</span></label>
+          <input id="gridSize" type="range" min="10" max="100" value="50" class="w-full cursor-pointer accent-purple-500" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="space-y-3">
+          <button id="eraserBtn" class="w-full py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition font-medium">
+            🧽 Eraser
+          </button>
+          <button id="clearBtn" class="w-full py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition font-medium">
+            🗑️ Clear All
+          </button>
+          <button id="saveBtn" class="w-full py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition font-medium">
+            💾 Save Drawing
+          </button>
+        </div>
+      </div>
+
+      <p class="text-center text-gray-500 text-sm mt-8 italic">Made with 💜 by Nouhaila</p>
+    </div>
+
+    <!-- Drawing Board -->
+    <div class="flex-1 flex justify-center items-center">
+      <div id="gridContainer"
+        class="grid bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden"
+        style="grid-template-columns: repeat(50, 1fr); width: 600px; height: 600px;">
+      </div>
+    </div>
+
+    <!-- Save Image -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
