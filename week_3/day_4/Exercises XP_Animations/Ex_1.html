@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    p {
+      background: yellow;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+     <div id="container"></div>
+  <button id="clear">Clear Interval</button>
+  
+  <script>
+   
+    setTimeout(() => {
+      alert("Hello World");
+    }, 2000);
+
+    
+    setTimeout(() => {
+      const div = document.getElementById("container");
+      const p = document.createElement("p");
+      p.textContent = "Hello World";
+      div.appendChild(p);
+    }, 2000);
+
+
+    const container = document.getElementById("container");
+    const clearBtn = document.getElementById("clear");
+
+    let counter = 0;
+    const interval = setInterval(() => {
+      const p = document.createElement("p");
+      p.textContent = "Hello World";
+      container.appendChild(p);
+      counter++;
+
+      
+      if (counter >= 5) {
+        clearInterval(interval);
+      }
+    }, 2000);
+
+    
+    clearBtn.addEventListener("click", () => {
+      clearInterval(interval);
+    });
+  </script>
+    
+</body>
+</html>
