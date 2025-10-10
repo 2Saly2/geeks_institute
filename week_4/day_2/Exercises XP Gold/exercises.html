@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// Exercise 1 : Analyzing the map method
+[1, 2, 3].map(num => {
+  if (typeof num === 'number') return num * 2;
+  return;
+});
+// Output: [2, 4, 6]
+
+
+// Exercise 2 : Analyzing the reduce method
+[[0, 1], [2, 3]].reduce(
+  (acc, cur) => {
+    return acc.concat(cur);
+  },
+  [1, 2],
+);
+// Output: [1, 2, 0, 1, 2, 3]
+
+
+// Exercise 3 : Analyze this code
+const arrayNum = [1, 2, 4, 5, 8, 9];
+const newArray = arrayNum.map((num, i) => {
+  console.log(num, i);
+  alert(num);
+  return num * 2;
+});
+// i = the index of each element (0, 1, 2, 3, 4, 5)
+
+
+// Exercise 4 : Nested arrays
+
+// 1 -Flatten partially
+const array = [[1],[2],[3],[[[4]]],[[[5]]]];
+const flatArray = array.flat(2);
+console.log(flatArray); // [1, 2, 3, [4], [5]]
+
+// 2- Join nested greetings
+const greeting = [["Hello", "young", "grasshopper!"], ["you", "are"], ["learning", "fast!"]];
+const joinedGreeting = greeting.map(arr => arr.join(" "));
+console.log(joinedGreeting); // ["Hello young grasshopper!", "you are", "learning fast!"]
+
+// 3- Turn greeting array into one string
+const fullGreeting = joinedGreeting.join(" ");
+console.log(fullGreeting); // "Hello young grasshopper! you are learning fast!"
+
+// 4- Untrap the number 3
+const trapped = [[[[[[[[[[[[[[[[[[[[[[[[[[3]]]]]]]]]]]]]]]]]]]]]]]]]];
+const untrapped = trapped.flat(Infinity);
+console.log(untrapped); // [3]
+
+    </script>
+</body>
+</html>
