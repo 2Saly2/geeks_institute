@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2> Exercise 1 : HTML Form (GET)</h2>
+
+  <form action="" method="GET">
+    <label>Name:</label>
+    <input type="text" name="name"><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="4" cols="40"></textarea><br><br>
+
+    <input type="submit" value="Send (GET)">
+  </form>
+
+  <hr>
+
+  <!-- Exercise 2 : HTML Form (POST Method) -->
+  <h2> HTML Form (POST)</h2>
+
+  <form action="" method="POST">
+    <label>Name:</label>
+    <input type="text" name="name"><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="4" cols="40"></textarea><br><br>
+
+    <input type="submit" value="Send (POST)">
+  </form>
+
+  <hr>
+
+  <!--  Exercise 3 : JSON Mario -->
+  <h2> JSON Mario</h2>
+  <p>Open the browser console to see the JSON output.</p>
+
+
+<script>
+    //  Exercise 3 
+const marioGame = {
+      detail : "An amazing game!",
+      characters : {
+          mario : {
+            description:"Small and jumpy. Likes princesses.",
+            height: 10,
+            weight: 3,
+            speed: 12,
+          },
+          bowser : {
+            description: "Big and green, Hates princesses.",
+            height: 16,
+            weight: 6,
+            speed: 4,
+          },
+          princessPeach : {
+            description: "Beautiful princess.",
+            height: 12,
+            weight: 2,
+            speed: 2,
+          }
+      },
+    };
+
+    const jsonMario = JSON.stringify(marioGame);
+    
+    const prettyJSON = JSON.stringify(marioGame, null, 2);
+
+    console.log("JSON Mario (compact):", jsonMario);
+    console.log("JSON Mario (pretty):\n", prettyJSON);
+    </script>
+</body>
+</html>

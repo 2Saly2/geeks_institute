@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Received Data</h2>
+<section id="output"></section>
+
+  <script>
+    
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const lastname = params.get("lastname");
+
+    const output = document.getElementById("output");
+
+    if (name && lastname) {
+      output.textContent = `Full Name: ${name} ${lastname}`;
+    } else {
+      output.textContent = "No data received.";
+    }
+  </script>
+</body>
+</html>
