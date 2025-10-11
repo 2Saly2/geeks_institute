@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// Exercise 
+
+// Create the Video class
+class Video {
+  constructor(title, uploader, time) {
+    this.title = title;
+    this.uploader = uploader;
+    this.time = time;
+  }
+
+  // Method that displays the message
+  watch() {
+    console.log(`${this.uploader} watched all ${this.time} seconds of "${this.title}"!`);
+  }
+}
+
+// Instantiate the first video
+const video1 = new Video("Learn JavaScript in 10 Minutes", "John", 600);
+video1.watch();
+
+// Instantiate the second video
+const video2 = new Video("Intro to Python", "Sarah", 900);
+video2.watch();
+
+// Bonus: 
+const videosData = [
+  { title: "HTML Basics", uploader: "Anna", time: 300 },
+  { title: "CSS Flexbox Tutorial", uploader: "Mike", time: 450 },
+  { title: "React Crash Course", uploader: "Emma", time: 1200 },
+  { title: "Node.js Overview", uploader: "Tom", time: 800 },
+  { title: "Flask for Beginners", uploader: "Nora", time: 700 },
+];
+
+// Loop through the array and create Video instances
+const videoInstances = videosData.map(video => new Video(video.title, video.uploader, video.time));
+
+// Call the watch() method for each video
+videoInstances.forEach(video => video.watch());
+
+    </script>
+</body>
+</html>
