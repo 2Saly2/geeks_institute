@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giphy API Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fafafa;
+      margin-top: 40px;
+    }
+    img {
+      width: 300px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random GIF from Giphy</h1>
+  <button onclick="getGif()">Get another GIF</button>
+  <div id="gif-container">Loading...</div>
+
+  <script>
+    // Exercise 1:
+    const API_KEY = "PNkmJUItWHZrGVUlgihh5GpbQ85hwhGZ";
+    const API_URL = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=hilarious&limit=20&rating=g`;
+
+    async function getGif() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error("Network response was not ok");
+
+        const data = await response.json();
+        const gifs = data.data;
+
+        if (gifs.length === 0) {
+          document.getElementById("gif-container").innerText = "No GIFs found 😕";
+          return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * gifs.length);
+        const gifUrl = gifs[randomIndex].images.original.url;
+
+        const img = document.createElement("img");
+        img.src = gifUrl;
+        img.alt = "Funny GIF";
+
+        const container = document.getElementById("gif-container");
+        container.innerHTML = "";
+        container.appendChild(img);
+
+      } catch (error) {
+        console.error("Error fetching the GIF:", error);
+        document.getElementById("gif-container").innerText = "⚠️ Error loading GIF!";
+      }
+    }
+
+    getGif();
+
+    // Exercise 2:
+    let resolveAfter2Seconds = function () {
+    console.log("starting slow promise");
+    return new Promise(resolve => {
+        setTimeout(function () {
+            resolve("slow");
+            console.log("slow promise is done");
+        }, 2000);
+    });
+};
+
+let resolveAfter1Second = function () {
+    console.log("starting fast promise");
+    return new Promise(resolve => {
+        setTimeout(function () {
+            resolve("fast");
+            console.log("fast promise is done");
+        }, 1000);
+    });
+};
+
+let sequentialStart = async function () {
+    console.log('==SEQUENTIAL START==');
+    const slow = await resolveAfter2Seconds();
+    console.log(slow);
+    const fast = await resolveAfter1Second();
+    console.log(fast);
+}
+
+sequentialStart()
+
+// ==SEQUENTIAL START==
+// starting slow promise
+// slow promise is done
+// slow
+// starting fast promise
+// fast promise is done
+// fast
+
+//Exercise 3
+
+// let resolveAfter2Seconds = function () {
+//     console.log("starting slow promise");
+//     return new Promise(resolve => {
+//         setTimeout(function () {
+//             resolve("slow");
+//             console.log("slow promise is done");
+//         }, 2000);
+//     });
+// };
+
+// let resolveAfter1Second = function () {
+//     console.log("starting fast promise");
+//     return new Promise(resolve => {
+//         setTimeout(function () {
+//             resolve("fast");
+//             console.log("fast promise is done");
+//         }, 1000);
+//     });
+// };
+
+// let concurrentStart = async function () {
+//     console.log('==CONCURRENT START with await==');
+//     const slow = resolveAfter2Seconds();
+//     const fast = resolveAfter1Second();
+//     console.log(await slow);
+//     console.log(await fast);
+// }
+
+// setTimeout(concurrentStart, 4000)
+
+// ==CONCURRENT START with await==
+// starting slow promise
+// starting fast promise
+// fast promise is done
+// slow promise is done
+// slow
+// fast 
+
+// Exercise 4 :
+
+const urls = [
+  "https://jsonplaceholder.typicode.com/users",
+// "https://jsonplaceholder.typicode.com/users123" cet url on peut le le remplacer par l'un d'entre eux  pour afficher oooops
+  "https://jsonplaceholder.typicode.com/posts",
+  "https://jsonplaceholder.typicode.com/albums"
+];
+
+const getData = async function() {
+  try {
+    
+    const [users, posts, albums] = await Promise.all(
+      urls.map(async (url) => {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error("Network error");
+        return await resp.json();
+      })
+    );
+
+    console.log("users", users);
+    console.log("posts", posts);
+    console.log("albums", albums);
+
+  } catch (error) {
+    console.log("ooooooops");
+  }
+};
+
+getData();
+
+
+
+
+  </script>
+</body>
+</html>

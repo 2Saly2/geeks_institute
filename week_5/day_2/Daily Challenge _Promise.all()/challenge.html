@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise Time</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 20px; }
+    input { margin: 5px; padding: 5px; width: 150px; }
+    button { padding: 5px 10px; cursor: pointer; }
+    #result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Sunrise Time Checker</h1>
+
+  <form id="sunriseForm">
+    <h3>City 1</h3>
+    <input type="number" step="any" id="lat1" placeholder="Latitude" required>
+    <input type="number" step="any" id="lng1" placeholder="Longitude" required>
+    <h3>City 2</h3>
+    <input type="number" step="any" id="lat2" placeholder="Latitude" required>
+    <input type="number" step="any" id="lng2" placeholder="Longitude" required>
+    <br>
+    <button type="submit">Get Sunrise Times</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById("sunriseForm");
+const resultDiv = document.getElementById("result");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const lat1 = document.getElementById("lat1").value.trim();
+  const lng1 = document.getElementById("lng1").value.trim();
+  const lat2 = document.getElementById("lat2").value.trim();
+  const lng2 = document.getElementById("lng2").value.trim();
+
+  const url1 = `https://api.sunrise-sunset.org/json?lat=${lat1}&lng=${lng1}&formatted=0`;
+  const url2 = `https://api.sunrise-sunset.org/json?lat=${lat2}&lng=${lng2}&formatted=0`;
+
+  try {
+    // Promise.all to wait for both requests
+    const [res1, res2] = await Promise.all([fetch(url1), fetch(url2)]);
+
+    if (!res1.ok || !res2.ok) throw new Error("Network error");
+
+    const data1 = await res1.json();
+    const data2 = await res2.json();
+
+    const sunrise1 = new Date(data1.results.sunrise).toLocaleTimeString();
+    const sunrise2 = new Date(data2.results.sunrise).toLocaleTimeString();
+
+    resultDiv.innerHTML = `
+      <p>City 1 Sunrise: ${sunrise1}</p>
+      <p>City 2 Sunrise: ${sunrise2}</p>
+    `;
+  } catch (error) {
+    console.log("Error fetching sunrise data:", error);
+    resultDiv.textContent = " Error fetching sunrise times!";
+  }
+});
+
+  </script>
+</body>
+</html>
