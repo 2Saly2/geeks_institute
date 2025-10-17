@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Star Wars Characters - Fix</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome (CSS) for spinner icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KWy3+eY1rX6K3g9ZrKfVZ0HcQ3W8wqvP/0VZ9mZB7z3eK0y5k1e6mP3xj5k2V5e6N6jQ0k1v7c6sJ0Yx1z==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center bg-[url('https://images.unsplash.com/photo-1473187983305-f615310e7daa?auto=format&fit=crop&w=1600&q=80')] bg-cover">
+
+  <!-- Logo -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Star_Wars_Logo.svg"
+       alt="Star Wars"
+       class="w-72 mb-8 drop-shadow-[0_0_10px_rgb(250,204,21)]">
+
+  <!-- Card -->
+  <div id="character-card" class="border-2 border-yellow-400 rounded-2xl bg-black/90 p-8 text-white text-center w-[90%] max-w-md mb-6 transition-all duration-300">
+    <h2 id="name" class="text-2xl font-bold mb-4">Press the button to start</h2>
+    <p id="height" class="mb-2"></p>
+    <p id="gender" class="mb-2"></p>
+    <p id="birth" class="mb-2"></p>
+    <p id="world" class="mb-2"></p>
+
+    <!-- مكان رسائل الخطأ أو info صغيرة -->
+    <p id="message" class="text-sm text-yellow-300 mt-2"></p>
+  </div>
+
+  <button id="find-btn" class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg shadow-md transition">
+    Find Someone
+  </button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const findBtn = document.getElementById('find-btn');
+      const nameEl = document.getElementById('name');
+      const heightEl = document.getElementById('height');
+      const genderEl = document.getElementById('gender');
+      const birthEl = document.getElementById('birth');
+      const worldEl = document.getElementById('world');
+      const messageEl = document.getElementById('message');
+      const card = document.getElementById('character-card');
+
+      // helper: show loading state
+      function setLoading(isLoading) {
+        if (isLoading) {
+          findBtn.disabled = true;
+          findBtn.classList.add('opacity-70','cursor-not-allowed');
+          nameEl.innerHTML = '<i class="fas fa-spinner fa-spin text-yellow-400"></i> Loading...';
+          heightEl.textContent = '';
+          genderEl.textContent = '';
+          birthEl.textContent = '';
+          worldEl.textContent = '';
+          messageEl.textContent = '';
+        } else {
+          findBtn.disabled = false;
+          findBtn.classList.remove('opacity-70','cursor-not-allowed');
+        }
+      }
+
+      async function getCharacter(id) {
+        try {
+          setLoading(true);
+
+          // fetch character
+          const res = await fetch(`https://www.swapi.tech/api/people/${id}`);
+          if (!res.ok) {
+            // response not ok (e.g. 404)
+            throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+          }
+          const data = await res.json();
+
+          // safety checks
+          if (!data || !data.result || !data.result.properties) {
+            throw new Error('Invalid data structure from API');
+          }
+
+          const char = data.result.properties;
+          console.log('character raw data:', char);
+
+          // fetch homeworld (world URL provided by API)
+          let homeWorldName = 'Unknown';
+          if (char.homeworld) {
+            try {
+              const wRes = await fetch(char.homeworld);
+              if (!wRes.ok) throw new Error('Homeworld fetch failed: ' + wRes.status);
+              const wData = await wRes.json();
+              if (wData && wData.result && wData.result.properties && wData.result.properties.name) {
+                homeWorldName = wData.result.properties.name;
+              } else {
+                homeWorldName = 'Unknown';
+              }
+            } catch (err) {
+              console.warn('Homeworld fetch error:', err);
+              homeWorldName = 'Unknown';
+            }
+          }
+
+          // display
+          nameEl.textContent = char.name || '—';
+          heightEl.textContent = `Height: ${char.height || '—'}`;
+          genderEl.textContent = `Gender: ${char.gender || '—'}`;
+          birthEl.textContent = `Birth Year: ${char.birth_year || '—'}`;
+          worldEl.textContent = `Home World: ${homeWorldName}`;
+
+          messageEl.textContent = ''; // clear any previous message
+        } catch (error) {
+          console.error('Fetch error:', error);
+          // show friendly error message
+          nameEl.innerHTML = '<span class="text-red-400 font-semibold">حدث خطأ أثناء جلب البيانات</span>';
+          heightEl.textContent = '';
+          genderEl.textContent = '';
+          birthEl.textContent = '';
+          worldEl.textContent = '';
+          messageEl.textContent = 'حاول مرة أخرى أو افتح Console لرؤية تفاصيل الخطأ.';
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      // attach click listener
+      findBtn.addEventListener('click', () => {
+        // generate id 1..83
+        const randomId = Math.floor(Math.random() * 83) + 1;
+        console.log('Requesting character id:', randomId);
+        getCharacter(randomId);
+      });
+
+      // Optional: load an initial character (uncomment if you want)
+      // getCharacter(1);
+    });
+  </script>
+</body>
+</html>
