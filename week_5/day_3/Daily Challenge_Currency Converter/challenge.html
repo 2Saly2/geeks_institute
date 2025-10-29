@@ -53,7 +53,7 @@
     const resultDiv = document.getElementById("result");
     const amountInput = document.getElementById("amount");
 
-    // 1️⃣ جلب جميع العملات من API
+    // API
     async function loadCurrencies() {
       try {
         const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/codes`);
