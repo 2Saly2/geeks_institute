@@ -7,6 +7,11 @@ const PORT = 3000;
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 
+// Home route
+app.get("/", (req, res) => {
+  res.redirect("/quiz");
+});
+
 // Routes
 app.use("/quiz", quizRouter);
 
