@@ -1,0 +1,111 @@
+/* -------- GENERAL STYLE -------- */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.4s ease;
+}
+
+/* Light Mode */
+.light {
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* Dark Mode */
+.dark {
+  background: #1e1e1e;
+  color: #eee;
+}
+
+/* -------- CONTAINER -------- */
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* -------- TITLES -------- */
+.main-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+/* -------- SWITCH BUTTON -------- */
+.switch-btn {
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: 0.3s ease;
+  font-weight: 600;
+}
+
+.light .switch-btn {
+  background: #222;
+  color: #fff;
+}
+
+.dark .switch-btn {
+  background: #f1f1f1;
+  color: #222;
+}
+
+.switch-btn:hover {
+  transform: scale(1.05);
+}
+
+/* -------- CARD -------- */
+.card {
+  background: inherit;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.light .card {
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* -------- INPUT -------- */
+.styled-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  transition: 0.2s;
+}
+
+.dark .styled-input {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.styled-input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 8px rgba(108,99,255,0.5);
+}
+
+/* -------- COUNTER TEXT -------- */
+.count {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.count span {
+  font-weight: 700;
+  color: #6c63ff;
+}
